@@ -26,7 +26,7 @@ export default function HomePage() {
     return (
         <div className="homePage">
             <h6>
-                Поиск карты
+                Поиск помещения
             </h6>
             <div className="search dropdown-center input-group mb-3" id="searchList" data-bs-toggle="dropdown" aria-expanded="false">
                 <input type="text" className="form-control" placeholder="Введите название помещения"

@@ -13,7 +13,9 @@ export const MapPage = ({ mapName }) => {
         <div className="mapPage">
             <h5>
                 {/*{params.mapName || ''}*/}
+                КФУ, ИТИС, 15 этаж
             </h5>
+            <img src="/itis15map.png" className="map img-fluid" />
             <button
                 className=" btn btn-primary me-md-2"
                 type="button"
