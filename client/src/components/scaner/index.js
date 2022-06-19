@@ -8,19 +8,20 @@ export const ScannerPage = () => {
 
     const takePhoto = () => {
         captureImage();
-        fetch(imageData)
-            .then((res) => res.blob())
-            .then((blob) => {
-                const file = new File([blob], "File name", {
-                    type: "image/png",
-                });
-                setFile(file);
-            });
+        setFile(imageData)
+        // fetch(imageData)
+        //     .then((res) => res.blob())
+        //     .then((blob) => {
+        //         const file = new File([blob], "File name", {
+        //             type: "image/png",
+        //         });
+        //         setFile(file);
+        //     });
     };
 
     return (
         <div className="scannerPage">
-            {!file ? (
+            {!file && (
                 <>
                     <h5>Наведите камеру на объект и сделайте фото</h5>
                     <div
@@ -33,7 +34,8 @@ export const ScannerPage = () => {
                         </div>
                     </div>
                 </>
-            ) : (
+            )}
+            {!!file && (
                 <>
                     <h5>Пожалуйста, подождите.<br/> Результат загружается</h5>
                     <img src={imageData} className="imageOnLoad img-fluid" />
