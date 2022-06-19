@@ -1,22 +1,41 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import React, {useEffect, useState} from "react";
+import "./App.scss";
+import {Routing} from "./components/routing";
+import {Navbar} from "./components/navbar";
 
 function App() {
-    const [data, setData] = React.useState(null);
+    const [width, setWidth] = useState(window.innerWidth);
+    // const [data, setData] = useState(null);
+    //
+    // useEffect(() => {
+    //     fetch("/api")
+    //         .then((res) => res.json())
+    //         .then((data) => setData(data.message));
+    // }, []);
 
-    React.useEffect(() => {
-        fetch("/api")
-            .then((res) => res.json())
-            .then((data) => setData(data.message));
+    useEffect(() => {
+        window.addEventListener("resize", handleWindowSizeChange);
+        return () => {
+            window.removeEventListener("resize", handleWindowSizeChange);
+        };
     }, []);
+
+    const handleWindowSizeChange = () => {
+        setWidth(window.innerWidth);
+    };
 
     return (
         <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo"/>
-                <p>{!data ? "Loading..." : data}</p>
-            </header>
+            {width < 768 ? (
+                <>
+                    <Navbar />
+                    <Routing />
+                </>
+            ) : (
+                <h2>
+                    Этот сайт доступен только на мобильных браузерах!
+                </h2>
+            )}
         </div>
     );
 }

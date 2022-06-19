@@ -1,0 +1,40 @@
+.homePage {
+  padding: 25px 15px;
+
+  h6 {
+    text-align: left;
+  }
+
+  .search {
+    margin-top: 15px;
+
+    input {
+      height: 40px;
+
+      &:hover, &:active {
+        border: 1px solid rgba(61, 156, 151, 0.7);
+        box-shadow: none;
+      }
+    }
+
+    .form-control:focus {
+      border: 1px solid rgba(61, 156, 151, 0.7);
+      box-shadow: none;
+    }
+
+    .dropdown-menu {
+      width: 100%;
+      --bs-dropdown-border-color: none;
+
+      .dropdown-item {
+        padding: 15px 11px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+
+        &:hover {
+          background: rgba(61, 156, 151, 0.2);
+          color: black;
+        }
+      }
+    }
+  }
+}

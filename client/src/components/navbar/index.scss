@@ -1,0 +1,49 @@
+.navbarComponent {
+  padding: 30px 15px;
+  color: #ffffff;
+  background: #2B2B2B;
+
+  &.home {
+    background: url(bg.jpg);
+    background-size: cover;
+
+    .description {
+      display: block;
+    }
+
+    .main > .btn-primary {
+      --bs-btn-bg: #3D9C97;
+    }
+  }
+
+  .main {
+    align-items: center;
+    justify-content: space-between;
+
+    p {
+      text-transform: uppercase;
+      margin-bottom: 0;
+      font-weight: 700;
+    }
+
+    .btn-primary {
+      --bs-btn-padding-y: 5px;
+      --bs-btn-padding-x: 16px;
+      --bs-btn-bg: #2B2B2B;
+      --bs-btn-hover-bg: #3D9C97;
+      --bs-btn-border-color: #3D9C97;
+      --bs-btn-border-radius: 28px;
+      --bs-btn-font-size: 12px;
+    }
+  }
+
+  .description {
+    display: none;
+    margin-top: 24px;
+
+    p {
+      text-align: left;
+      line-height: 19px;
+    }
+  }
+}
