@@ -3,4 +3,19 @@ const ObjectType = {
     PLATE: 'plate',
 }
 
-module.exports = {ObjectType}
+const ImageStatus = {
+    PROCESSING: 'processing',
+    READY: 'ready',
+    ERROR: 'error',
+}
+
+const FeatureName = {
+    COLOR: 'color',
+    TEXT: 'text',
+}
+
+module.exports = {
+    ObjectType,
+    ImageStatus,
+    FeatureName,
+}
