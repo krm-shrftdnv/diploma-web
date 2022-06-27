@@ -9,7 +9,7 @@
         "colorRecognitionWorker": "node server/workers/color.js",
         "objectsRecognitionWorker": "node server/workers/objects.js",
         "textRecognitionWorker": "node server/workers/text.js",
-        "start": "concurrently --kill-others \"npm run colorRecognitionWorker\" \"npm run objectsRecognitionWorker\" \"npm run textRecognitionWorker\" \"npm run start\""
+        "start": "concurrently --kill-others \"npm run colorRecognitionWorker\" \"npm run objectsRecognitionWorker\" \"npm run textRecognitionWorker\" \"npm run dev\""
     },
     "keywords": [],
     "author": "",
