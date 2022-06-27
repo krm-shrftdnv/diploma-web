@@ -6,7 +6,6 @@ const bodyParser = require('body-parser');
 const {v4: uuidv4} = require('uuid');
 const cors = require('cors');
 const {ImageStatus} = require("./enums");
-const fs = require("fs");
 
 const {handleError} = require("./components/error");
 const {RecognizingObjectsCacheStorage} = require('./components/RecognizingObjectCacheStorage');
@@ -20,15 +19,6 @@ const app = express();
 const imageReceivedListener = new ImageReceivedListener();
 const storage = RecognizingObjectsCacheStorage.getInstance();
 const db = DB.getInstance();
-
-let i = 0;
-
-const buffer_191 = fs.readFileSync(path.resolve(__dirname, 'storage/maps/191.jpg'));
-const b64_191 = buffer_191.toString('base64');
-const buffer_198 = fs.readFileSync(path.resolve(__dirname, './storage/maps/198.jpg'));
-const b64_198 = buffer_198.toString('base64');
-
-
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(cors({
@@ -64,20 +54,6 @@ app.post('/api/recognize', (req, res) => {
     let mapId = data.map_id;
     let imageId = uuidv4();
     storage.addImage(imageId, imageBase64, mapId);
-    if (i === 0) {
-        setInterval(() => {
-            storage.setMapImage(imageId, 'data:image/jpeg;base64,' + b64_191);
-            storage.setImageStatus(imageId, ImageStatus.READY);
-            i++;
-        }, 15000)
-    }
-    if (i > 0) {
-        setInterval(() => {
-            storage.setMapImage(imageId, 'data:image/jpeg;base64,' + b64_198);
-            storage.setImageStatus(imageId, ImageStatus.READY);
-            i = 0;
-        }, 15000)
-    }
     // setInterval(() => {
     //     storage.setImageStatus(imageId, ImageStatus.READY);
     //     storage.setMapImage(imageId, imageBase64);

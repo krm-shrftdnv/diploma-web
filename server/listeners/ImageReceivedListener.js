@@ -19,7 +19,7 @@ class ImageReceivedListener extends ImageReceivedListenerInterface {
     }
 
     recognizeObjects(imageId, imageBase64) {
-        // recognitionService.recognize(imageId, imageBase64);
+        recognitionService.recognize(imageId, imageBase64);
     }
 
     emit(imageId, imageBase64) {
