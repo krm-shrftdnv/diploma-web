@@ -168,6 +168,7 @@ const handleError = (err, res) => {
 // routes
 app.get('/api/maps', (req, res) => {
     sequelize.query("SELECT * FROM map", { type: QueryTypes.SELECT }).then((maps) => {
+        console.log(maps);
         res.json(maps);
     }).catch(err => {
         handleError(err, res);
@@ -184,8 +185,9 @@ app.get('/api/map/:mapId', (req, res) => {
     sequelize.query("SELECT * FROM map where id = :mapId", {
         replacements: { mapId: req.params.mapId},
         type: QueryTypes.SELECT
-    }).then((maps) => {
-        res.json(maps);
+    }).then((map) => {
+        console.log(map);
+        res.json(map);
     }).catch(err => {
         handleError(err, res);
     });
