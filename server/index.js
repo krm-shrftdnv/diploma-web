@@ -15,7 +15,7 @@ const util = require("util");
 // const {handleError} = require("./components/error");
 // const {RecognizingObjectsCacheStorage} = require('./components/RecognizingObjectCacheStorage');
 // const {DB} = require('./components/db');
-// const {Map} = require('./models');
+const {Map} = require('./models');
 // const {ImageReceivedListener} = require('./listeners/ImageReceivedListener');
 const {Sequelize} = require('sequelize');
 
