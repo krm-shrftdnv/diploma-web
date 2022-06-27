@@ -17,6 +17,7 @@ const util = require("util");
 // const {DB} = require('./components/db');
 const {Map} = require('./models');
 // const {ImageReceivedListener} = require('./listeners/ImageReceivedListener');
+const { QueryTypes } = require('sequelize');
 const {Sequelize} = require('sequelize');
 
 const PG_HOST = process.env.PG_HOST
@@ -100,7 +101,7 @@ class RecognizingImageDto {
      */
     status;
 
-    constructor(imageId, imageBase64, mapId, objects = [], status = ImageStatus.PROCESSING) {
+    constructor(imageId, imageBase64, mapId, objects = [], status = 'processing') {
         this.imageId = imageId;
         this.imageBase64 = imageBase64;
         this.mapId = mapId;
@@ -166,19 +167,33 @@ const handleError = (err, res) => {
 
 // routes
 app.get('/api/maps', (req, res) => {
-    Map.findAll().then((maps) => {
+    sequelize.query("SELECT * FROM map", { type: QueryTypes.SELECT }).then((maps) => {
         res.json(maps);
     }).catch(err => {
         handleError(err, res);
     });
+    //
+    // Map.findAll().then((maps) => {
+    //     res.json(maps);
+    // }).catch(err => {
+    //     handleError(err, res);
+    // });
 });
 
 app.get('/api/map/:mapId', (req, res) => {
-    Map.findByPk(req.params.mapId).then((map) => {
-        res.json(map);
+    sequelize.query("SELECT * FROM map where id = :mapId", {
+        replacements: { mapId: req.params.mapId},
+        type: QueryTypes.SELECT
+    }).then((maps) => {
+        res.json(maps);
     }).catch(err => {
         handleError(err, res);
-    })
+    });
+    // Map.findByPk(req.params.mapId).then((map) => {
+    //     res.json(map);
+    // }).catch(err => {
+    //     handleError(err, res);
+    // })
 });
 
 app.post('/api/recognize', (req, res) => {
