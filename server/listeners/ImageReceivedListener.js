@@ -1,4 +1,4 @@
-const EventEmitter = require('node:events');
+const EventEmitter = require('events');
 
 const {RecognitionService: recognitionService} = require('../services/RecognitionService');
 const {ImageReceivedListenerInterface} = require('../interfaces/listeners')

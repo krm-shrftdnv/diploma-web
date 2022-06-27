@@ -1,4 +1,4 @@
-const EventEmitter = require('node:events');
+const EventEmitter = require('events');
 
 const {ObjectsRecognizedListenerInterface} = require('../interfaces/listeners')
 const {ObjectDto} = require('../dto');

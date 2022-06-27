@@ -13,8 +13,8 @@ export const Routing = () => {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/map/:mapName" element={<MapPage />} />
-                <Route path="/scan" element={<ScannerPage />} />
+                <Route path="/map/:mapId" element={<MapPage />} />
+                <Route path="/scan/:mapId" element={<ScannerPage />} />
             </Routes>
         </BrowserRouter>
     );

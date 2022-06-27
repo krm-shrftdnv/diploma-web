@@ -6,7 +6,7 @@ export const Navbar = () => {
         <div className={window.location.pathname === "/" ? "navbarComponent home" : "navbarComponent"}>
             <div className="main d-flex">
                 <p onClick={event =>  window.location.href=`/`}>Offigator</p>
-                <button className=" btn btn-primary me-md-2" type="button">Создать карту</button>
+                {/*<button className=" btn btn-primary me-md-2" type="button">Создать карту</button>*/}
             </div>
             <div className="description">
                 <p>Offigator - приложение для навигации внутри помещений.</p>

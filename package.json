@@ -6,9 +6,9 @@
     "scripts": {
         "start": "node server/index.js",
         "build": "cd client && npm install && npm run build",
-        "colorRecognitionWorker": "node server/workes/objectsRecognitionWorkerr.js",
-        "objectsRecognitionWorker": "node server/workers/objectsRecognitionWorker.js",
-        "textRecognitionWorker": "node server/workers/textRecognitionWorker.js",
+        "colorRecognitionWorker": "node server/workers/color.js",
+        "objectsRecognitionWorker": "node server/workers/objects.js",
+        "textRecognitionWorker": "node server/workers/text.js",
         "dev": "concurrently --kill-others \"npm run colorRecognitionWorker\" \"npm run objectsRecognitionWorker\" \"npm run textRecognitionWorker\" \"npm run start\""
     },
     "keywords": [],
@@ -16,9 +16,13 @@
     "license": "ISC",
     "dependencies": {
         "amqplib": "^0.10.0",
+        "body-parser": "^1.20.0",
         "bootstrap": "^5.2.0-beta1",
+        "cors": "^2.8.5",
         "dotenv": "^16.0.1",
+        "events": "^3.3.0",
         "express": "^4.18.1",
+        "foo-foo-mq": "^7.0.0",
         "multer": "^1.4.5-lts.1",
         "node-cache": "^5.1.2",
         "pg": "^8.7.3",

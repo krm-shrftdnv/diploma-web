@@ -1,26 +1,20 @@
 import React, {useEffect, useState} from "react";
 import "./index.scss";
 import {Link} from "react-router-dom";
-
-const initList = [
-    {
-        id: 1,
-        name: "КФУ, ИТИС",
-        floor: "14"
-    },
-    {
-        id: 2,
-        name: "КФУ, ИТИС",
-        floor: "15"
-    }
-];
+import {api} from "../../axios";
 
 export default function HomePage() {
-    const [searchItems, setSearchItems] = useState(initList);
+    const [searchItems, setSearchItems] = useState([{map_id: 0, map_name: ""}]);
     const [searchValue, setSearchValue] = useState("");
 
     useEffect(() => {
-        setSearchItems(initList.filter(item => item.name.includes(searchValue) || item.floor.includes(searchValue)));
+        api.get("/api/maps").then(res => {
+            setSearchItems(res.data);
+        });
+    }, []);
+
+    useEffect(() => {
+        setSearchItems(searchItems.filter(item => item.map_name.includes(searchValue)));
     }, [searchValue]);
 
     return (
@@ -44,9 +38,9 @@ export default function HomePage() {
                 <ul className="dropdown-menu" aria-labelledby="searchList">
                     {searchItems.map((item, index) => {
                         return (
-                            <li key={index} onClick={event =>  window.location.href=`/map/${item.id}`}>
-                                <Link className="dropdown-item" to={`/map/${item.id}`}>
-                                    {item.name + ", " + item.floor + " этаж"}
+                            <li key={index} onClick={event =>  window.location.href=`/map/${item.map_id}`}>
+                                <Link className="dropdown-item" to={`/map/${item.map_id}`}>
+                                    {item.map_name}
                                 </Link>
                             </li>
                         )

@@ -57,7 +57,7 @@ class RecognizingImageDto {
     /**
      * @type {string|null}
      */
-    mapImageBase64 = null;
+    location_image = null;
 
     /**
      *
@@ -96,11 +96,16 @@ class RecognizingImageDto {
         return texts;
     }
 
+    /**
+     * Transforms the machine instance to a JavaScript object.
+     *
+     * @returns {Object}
+     */
     toJSON() {
         return {
             image_id: this.imageId,
             status: this.status,
-            location_image: this.mapImageBase64,
+            location_image: this.location_image,
             location: this.location,
             recognized_image: this.imageBase64,
             texts: this.getTexts(),

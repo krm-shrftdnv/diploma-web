@@ -3,7 +3,7 @@ const {RecognizingImageDto} = require("../dto.js");
 
 class RecognizingObjectStorageInterface extends AbstractClass {
     constructor() {
-        super(RecognizingObjectStorageInterface, ['addObject', 'addFeatureValue', 'getObjectInfo', 'getObjectStatus', 'setObjectReady', 'hasImage', 'getImageStatus', 'setImageStatus'])
+        super(RecognizingObjectStorageInterface, ['addImage', 'addObject', 'addFeatureValue', 'getImageInfo', 'getImageStatus', 'setImageStatus', 'hasImage', 'getImageStatus'])
     }
 
     /**

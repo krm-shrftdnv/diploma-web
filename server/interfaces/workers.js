@@ -1,6 +1,13 @@
 const amqplib = require('amqplib/callback_api');
 const util = require("util");
-const {amqp} = require("../components/amqp")
+require('dotenv').config();
+
+const AMQP_HOST = process.env.AMQP_HOST;
+const AMQP_VHOST = process.env.AMQP_VHOST;
+const AMQP_PORT = process.env.AMQP_PORT;
+const AMQP_PORT_TLS = process.env.AMQP_PORT_TLS;
+const AMQP_USERNAME = process.env.AMQP_USERNAME;
+const AMQP_PASSWORD = process.env.AMQP_PASSWORD;
 
 const AbstractClass = require("./abstract.js");
 
@@ -27,6 +34,9 @@ class AbstractRecognizedQueueWorker extends RecognizedQueueWorkerInterface {
 
     startConsuming(queueName) {
         let self = this;
+        console.log(this.amqpUrl);
+        console.log(queueName);
+
         amqplib.connect(this.amqpUrl, function (err, connection) {
             if (err) {
                 self.handleError(err);
@@ -48,6 +58,7 @@ class AbstractRecognizedQueueWorker extends RecognizedQueueWorkerInterface {
     }
 
     handleError(err) {
+        console.log('handling error...')
         console.log(err);
     }
 

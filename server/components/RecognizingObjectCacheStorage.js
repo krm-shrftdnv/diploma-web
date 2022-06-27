@@ -61,6 +61,11 @@ class RecognizingObjectsCacheStorage extends RecognizingObjectStorageInterface {
         return this.cache.has(imageId);
     }
 
+    /**
+     * @param string imageId
+     *
+     * @return RecognizingImageDto
+     */
     getImageInfo(imageId) {
         return JSON.parse(this.cache.get(imageId));
     }
@@ -73,6 +78,12 @@ class RecognizingObjectsCacheStorage extends RecognizingObjectStorageInterface {
     setImageStatus(imageId, status) {
         let recognizingImage = JSON.parse(this.cache.get(imageId));
         recognizingImage.status = status;
+        this.cache.set(imageId, JSON.stringify(recognizingImage))
+    }
+
+    setMapImage(imageId, imageBase64) {
+        let recognizingImage = JSON.parse(this.cache.get(imageId));
+        recognizingImage.location_image = imageBase64;
         this.cache.set(imageId, JSON.stringify(recognizingImage))
     }
 }
