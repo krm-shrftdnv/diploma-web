@@ -66,14 +66,14 @@ app.post('/api/recognize', (req, res) => {
     storage.addImage(imageId, imageBase64, mapId);
     if (i === 0) {
         setInterval(() => {
-            storage.setMapImage(imageId, b64_191);
+            storage.setMapImage(imageId, 'data:image/jpeg;base64,' + b64_191);
             storage.setImageStatus(imageId, ImageStatus.READY);
             i++;
         }, 15000)
     }
     if (i > 0) {
         setInterval(() => {
-            storage.setMapImage(imageId, b64_198);
+            storage.setMapImage(imageId, 'data:image/jpeg;base64,' + b64_198);
             storage.setImageStatus(imageId, ImageStatus.READY);
             i = 0;
         }, 15000)
