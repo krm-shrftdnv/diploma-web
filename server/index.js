@@ -23,9 +23,9 @@ const db = DB.getInstance();
 
 let i = 0;
 
-const buffer_191 = fs.readFileSync('./storage/maps/191.jpg');
+const buffer_191 = fs.readFileSync(path.resolve(__dirname, 'storage/maps/191.jpg'));
 const b64_191 = buffer_191.toString('base64');
-const buffer_198 = fs.readFileSync('./storage/maps/198.jpg');
+const buffer_198 = fs.readFileSync(path.resolve(__dirname, './storage/maps/198.jpg'));
 const b64_198 = buffer_198.toString('base64');
 
 
