@@ -221,7 +221,9 @@ app.get('/api/map/:mapId', (req, res) => {
 app.post('/api/recognize', (req, res) => {
     let data = req.body;
     console.log(data.map_id);
-    let imageBase64 = data.image;
+    console.log(data.image.split('data:image/png;base64,')[0]);
+    console.log(data.image.split('data:image/png;base64,')[1]);
+    let imageBase64 = data.image.split('data:image/png;base64,')[0];
     let mapId = data.map_id;
     let imageId = uuidv4();
     let recognizingImage = new RecognizingImageDto(imageId, imageBase64, mapId);
