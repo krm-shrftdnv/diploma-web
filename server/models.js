@@ -71,6 +71,9 @@ Object.init({
     },
     map_id: {
         type: DataTypes.INTEGER,
+    },
+    map_path: {
+        type: DataTypes.STRING,
     }
 }, {
     sequelize,

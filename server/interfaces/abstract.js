@@ -1,5 +1,7 @@
 Object.prototype.super = function () {
-    return (Object.getPrototypeOf(Object.getPrototypeOf(this))).constructor.name;
+    if ((Object.getPrototypeOf(Object.getPrototypeOf(this))) !== null) {
+        return (Object.getPrototypeOf(Object.getPrototypeOf(this))).constructor.name;
+    }
 }
 
 const abstract_utils = {

@@ -4,12 +4,12 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "node server/index.js",
+        "dev": "node server/index.js",
         "build": "cd client && npm install && npm run build",
         "colorRecognitionWorker": "node server/workers/color.js",
         "objectsRecognitionWorker": "node server/workers/objects.js",
         "textRecognitionWorker": "node server/workers/text.js",
-        "dev": "concurrently --kill-others \"npm run colorRecognitionWorker\" \"npm run objectsRecognitionWorker\" \"npm run textRecognitionWorker\" \"npm run start\""
+        "start": "concurrently --kill-others \"npm run colorRecognitionWorker\" \"npm run objectsRecognitionWorker\" \"npm run textRecognitionWorker\" \"npm run start\""
     },
     "keywords": [],
     "author": "",

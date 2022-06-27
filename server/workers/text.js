@@ -3,6 +3,7 @@ const util = require("util");
 const sequelize = require("sequelize");
 const NodeCache = require("node-cache");
 const {QueryTypes} = require("sequelize");
+const fs = require('fs');
 require('dotenv').config();
 
 const AMQP_HOST = process.env.AMQP_HOST;
@@ -28,6 +29,10 @@ class FeatureDto {
     }
 }
 
+function base64_encode(file) {
+    return "data:image/jpeg;base64," + fs.readFileSync(file, 'base64');
+}
+
 function handleError(err) {
     console.log('handling error');
     console.log(err);
@@ -51,6 +56,7 @@ function getLocationByImageInfo(imageInfo) {
                 "       fv.value as value,\n" +
                 "       latitude as latitude,\n" +
                 "       longitude as longitude\n" +
+                "       object.map_path as mapPath" +
                 "from object\n" +
                 "join object_type ot on object.object_type_id = ot.id\n" +
                 "join feature_value fv on object.id = fv.object_id\n" +
@@ -70,14 +76,14 @@ function getLocationByImageInfo(imageInfo) {
             ).then();
             if (locationsInfo.length > 0) {
                 for (let locationInfo in locationsInfo) {
-                    let coordinates = locationInfo['latitude'] + ',' + locationInfo['longitude'];
-                    if (locations[coordinates] !== null && locations[coordinates] !== undefined) {
-                        locations[coordinates] += 1;
+                    let mapPath = locationInfo['mapPath'];
+                    if (locations[mapPath] !== null && locations[mapPath] !== undefined) {
+                        locations[mapPath] += 1;
                     } else {
-                        locations[coordinates] = 1;
+                        locations[mapPath] = 1;
                     }
-                    if (locations[coordinates] > max) {
-                        max = locations[coordinates];
+                    if (locations[mapPath] > max) {
+                        max = locations[mapPath];
                         maxLocationInfo = locationInfo;
                     }
                 }
@@ -103,6 +109,7 @@ function addFeatureValue(imageId, objectId, feature, value) {
         let location = getLocationByImageInfo(recognizingImage);
         if (location !== null) {
             recognizingImage.location = 'latitude: ' + location['latitude'] + ', longitude: ' + location['longitude'];
+            recognizingImage.location_image = base64_encode(location['mapPath']);
             setImageStatus(imageId, 'ready');
         } else {
             setImageStatus(imageId, 'error');
