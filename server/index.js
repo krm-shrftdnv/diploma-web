@@ -75,7 +75,7 @@ app.post('/api/recognize', (req, res) => {
         setInterval(() => {
             storage.setMapImage(imageId, b64_198);
             storage.setImageStatus(imageId, ImageStatus.READY);
-            i++;
+            i = 0;
         }, 15000)
     }
     // setInterval(() => {
