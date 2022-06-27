@@ -15,10 +15,9 @@ const util = require("util");
 // const {handleError} = require("./components/error");
 // const {RecognizingObjectsCacheStorage} = require('./components/RecognizingObjectCacheStorage');
 // const {DB} = require('./components/db');
-const {Map} = require('./models');
+// const {Map} = require('./models');
 // const {ImageReceivedListener} = require('./listeners/ImageReceivedListener');
-const { QueryTypes } = require('sequelize');
-const {Sequelize} = require('sequelize');
+const {Sequelize, DataTypes, Model, QueryTypes} = require('sequelize');
 
 const PG_HOST = process.env.PG_HOST
 const PG_PORT = process.env.PG_PORT
@@ -156,6 +155,43 @@ class ObjectsRequestDto {
     }
 }
 
+class Map extends Model {
+    toJSON() {
+        return {
+            map_id: this.id,
+            map_name: this.name,
+            image: this.image,
+        };
+    }
+}
+
+Map.init({
+    id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+    },
+    name: {
+        type: DataTypes.STRING,
+        unique: true,
+        allowNull: false,
+    },
+    longitude: {
+        type: DataTypes.FLOAT,
+    },
+    latitude: {
+        type: DataTypes.FLOAT,
+    },
+    image: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    }
+}, {
+    sequelize,
+    modelName: 'Map',
+    tableName: 'map',
+    timestamps: false,
+});
 
 const handleError = (err, res) => {
     console.log(err)
@@ -167,35 +203,19 @@ const handleError = (err, res) => {
 
 // routes
 app.get('/api/maps', (req, res) => {
-    sequelize.query("SELECT * FROM map", { type: QueryTypes.SELECT }).then((maps) => {
-        console.log(maps);
+    Map.findAll().then((maps) => {
         res.json(maps);
     }).catch(err => {
         handleError(err, res);
     });
-    //
-    // Map.findAll().then((maps) => {
-    //     res.json(maps);
-    // }).catch(err => {
-    //     handleError(err, res);
-    // });
 });
 
 app.get('/api/map/:mapId', (req, res) => {
-    sequelize.query("SELECT * FROM map where id = :mapId", {
-        replacements: { mapId: req.params.mapId},
-        type: QueryTypes.SELECT
-    }).then((map) => {
-        console.log(map);
+    Map.findByPk(req.params.mapId).then((map) => {
         res.json(map);
     }).catch(err => {
         handleError(err, res);
-    });
-    // Map.findByPk(req.params.mapId).then((map) => {
-    //     res.json(map);
-    // }).catch(err => {
-    //     handleError(err, res);
-    // })
+    })
 });
 
 app.post('/api/recognize', (req, res) => {
