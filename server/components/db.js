@@ -8,7 +8,20 @@ const PG_DB_NAME = process.env.PG_DB_NAME
 
 class DB {
     constructor() {
-        this.sequelize = new Sequelize('postgres://' + PG_USERNAME + ':' + PG_PASSWORD + '@' + PG_HOST + ':' + PG_PORT + '/' + PG_DB_NAME);
+        this.sequelize = new Sequelize({
+            database: PG_DB_NAME,
+            username: PG_USERNAME,
+            password: PG_PASSWORD,
+            host: PG_HOST,
+            port: PG_PORT,
+            dialect: "postgres",
+            dialectOptions: {
+                ssl: {
+                    require: true, // This will help you. But you will see nwe error
+                    rejectUnauthorized: false // This line will fix new error
+                }
+            },
+        });
     }
 
     static getInstance() {

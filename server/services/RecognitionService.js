@@ -57,7 +57,7 @@ class RecognitionService {
                     handleError(err);
                 }
                 let jsonImage = JSON.stringify(imageDto);
-                channel.sendToQueue('mrcnn_in', Buffer.from(jsonImage));
+                channel.sendToQueue('objects_in', Buffer.from(jsonImage));
             })
         })
     }
