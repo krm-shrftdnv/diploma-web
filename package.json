@@ -30,10 +30,10 @@
         "sequelize": "^6.21.0",
         "sharp": "^0.30.6",
         "util": "^0.12.4",
-        "uuid": "^8.3.2"
+        "uuid": "^8.3.2",
+        "concurrently": "^7.2.2"
     },
     "devDependencies": {
-        "concurrently": "^7.2.2"
     },
     "engines": {
         "node": "14.5.0"
