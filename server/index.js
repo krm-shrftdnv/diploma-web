@@ -1,6 +1,6 @@
 // imports
-import amqplib from "amqplib/callback_api";
-import NodeCache from "node-cache";
+const amqplib = require("amqplib/callback_api");
+const NodeCache = require("node-cache");
 
 require('dotenv').config();
 const path = require('path');
